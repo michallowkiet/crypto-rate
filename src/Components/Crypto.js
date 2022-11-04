@@ -15,18 +15,31 @@ const formatCurrency = (symbol, value) =>
 const Crypto = (props) => {
   const [crypto, setCrypto] = useState([]);
   const [filterInput, setFilterInput] = useState("");
-  const [filteredCryptoList, setfilteredCryptoList] = useState([]);
+
+  const filteredCryptoList = crypto.filter((el) => {
+    return el.currency.includes(filterInput);
+  });
 
   const filterInputHandler = (event) => {
     setFilterInput(event.target.value.trim().toUpperCase());
   };
 
-  const calcChange = (current, state) => {
-    if (state === undefined || state.length === 0) {
-      return 0;
+  const getClass = (changedValue) => {
+    if (changedValue === undefined || changedValue === 0) {
+      return "";
     }
 
-    return current - state.last;
+    return changedValue > 0 ? "up" : "down";
+  };
+
+  const getArrow = (changedValue) => {
+    if (changedValue === 0) {
+      return String.fromCharCode(8596);
+    }
+
+    return changedValue > 0
+      ? String.fromCharCode(8593)
+      : String.fromCharCode(8595);
   };
 
   const getData = () => {
@@ -42,7 +55,8 @@ const Crypto = (props) => {
               .split("")
               .slice(-1)
               .join(),
-            change: calcChange(el.last, state[index]),
+            class: getClass(el.last - state[index]?.last),
+            arrow: getArrow(el.last - state[index]?.last),
           });
         });
 
@@ -62,12 +76,6 @@ const Crypto = (props) => {
 
     return () => clearInterval(interval);
   }, []);
-
-  useEffect(() => {
-    setfilteredCryptoList(() => {
-      return crypto.filter((el) => el.currency.includes(filterInput));
-    });
-  }, [filterInput, crypto]);
 
   return (
     <div className="Crypto">
