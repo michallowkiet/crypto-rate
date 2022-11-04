@@ -1,0 +1,41 @@
+.Crypto-list {
+  margin: 4rem 0;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2em;
+}
+
+.Crypto-item {
+  width: 100%;
+  background-color: #eee;
+  padding: 1rem;
+}
+
+.Crypto-list,
+.Crypto-item {
+  border-radius: 1rem;
+  box-shadow: 0 0.5rem 0.75rem rgba(0, 0, 0, 0.2);
+}
+
+.Crypto-text {
+  display: flex;
+  justify-content: center;
+  gap: 0.75em;
+  font-weight: 700;
+}
+
+.Crypto-value {
+  font-weight: 400;
+  color: blue;
+}
+
+.down {
+  color: red;
+}
+
+.up {
+  color: green;
+}
