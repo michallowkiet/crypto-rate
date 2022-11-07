@@ -67,9 +67,7 @@ const Crypto = (props) => {
 
   useEffect(() => {
     getData();
-  }, []);
 
-  useEffect(() => {
     const interval = setInterval(() => {
       getData();
     }, 5000);
